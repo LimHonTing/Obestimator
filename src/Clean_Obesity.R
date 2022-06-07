@@ -1,3 +1,5 @@
+#This is the code that use to clean the data obtained from the website
+
 df = read.csv("obesity.csv")
 df2 = read.csv("obesity.csv")
 

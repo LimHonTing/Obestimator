@@ -2,9 +2,7 @@
 # The model below will be used to detect the level of obesity based on the input given by the users
 # We would use Multinomial Logistic Regression as the model for this purpose
 
-# The token for loading dataset will be constantly changed! Please copy the latest link from github before running the code.
-url <- "https://raw.githubusercontent.com/ryoshi007/Obesetimator/main/src/obesity(cleaned).csv?token=GHSAT0AAAAAABSTADEYWCCWXT35NEHXMBOGYU7J4ZQ"
-data <- read.csv(url)
+data <- read.csv("src/obesity(cleaned).csv")
 
 # Do some data cleaning
 library(dplyr)
@@ -60,11 +58,6 @@ train <- data[index,]
 test <- data[-index,]
 
 # Setting up the model
-library(MASS)
-model <- polr(TypeOfObesity~., train, Hess = TRUE)
-summary(model)
-
-# Setting up the model
 library(nnet)
 nnet_model <- multinom(TypeOfObesity~., train)
 
@@ -94,7 +87,7 @@ p <- (1 - pnorm(abs(z), 0, 1)) * 2
 p
 
 # Save the model to use it later for Shiny app
-saveRDS(nnet_model, "prediction_model.rds")
+saveRDS(nnet_model, "src/prediction_model.rds")
 
 # To read the model for Shiny app
-model <- readRDS("prediction_model.rds")
+model <- readRDS("src/prediction_model.rds")
