@@ -2,7 +2,7 @@
 # The model below will be used to detect the level of obesity based on the input given by the users
 # We would use Multinomial Logistic Regression as the model for this purpose
 
-data <- read.csv("src/obesity(cleaned).csv")
+data <- read.csv("obesity(cleaned).csv")
 
 # Do some data cleaning
 library(dplyr)
@@ -90,4 +90,8 @@ p
 saveRDS(nnet_model, "src/prediction_model.rds")
 
 # To read the model for Shiny app
-model <- readRDS("src/prediction_model.rds")
+model <- readRDS("prediction_model.rds")
+user_input <- predict(model, test[1,])
+print(user_input)
+result <- as.character(user_input)
+typeof(result)
