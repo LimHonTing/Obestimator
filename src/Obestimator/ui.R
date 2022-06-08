@@ -16,7 +16,7 @@ shinyUI(fluidPage(
             radioButtons("familyOverweight","5. Has a family member suffered or suffers from overweight?",c("Yes","No")),
             radioButtons("consumeHighCalories","6. Do you eat high calories food frequently?",c("Yes","No")),
             radioButtons("consumeVege","7. Do you usually eat vegetables in your meals?",c("Never", "Sometimes", "Always")),
-            radioButtons("mainMealsTime","8. How many main meals do you have daily?",c("Between 1 and 2","Three","More than 3")),
+            radioButtons("mainMealsTime","8. How many main meals do you have daily?",c("One","Two","Three","More than 3 meals")),
             radioButtons("foodBetweenMeal","9. Do you eat any food between meals?",c("No","Sometimes","Frequently","Always")),
             radioButtons("smoke","10. Do you smoke?",c("Yes","No")),
             radioButtons("waterConsumption","11. How much water do you drink daily?",c("Less than a litre","Between 1L and 2L","More than 2L")),
