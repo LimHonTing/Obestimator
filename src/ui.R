@@ -1,6 +1,7 @@
 library(shiny)
 library(shinythemes)
 library(shinyalert)
+library(shinyBS)
 
 shinyUI(fluidPage(theme = shinytheme("flatly"),
                   useShinyalert(force = TRUE),
@@ -73,8 +74,9 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           
                       #Result Panel
                       tabPanel("Prediction",
-                               h2(strong("Prediction:")),
+                               h2(strong("Prediction Result:")),
                                h3(verbatimTextOutput("predictionResult")),
+                               bsAlert("alert"),
                                br(),
                                br(),
                                h2(strong("Tips and Advices")),
