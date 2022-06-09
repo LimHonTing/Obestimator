@@ -1,7 +1,28 @@
 library(shiny)
 library(nnet)
+library(shinyBS)
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
+  
+    shinyalert(
+      title = "Welcome to Obestimator!",
+      text = "Did you know that cases of overweight people and obesity are now increasing at an alarming rate in the country?
+      Based on the National Health and Morbidity Survey, 50.1% of Malaysians were overweight with 19.7% of them facing obesity in 2019.
+      In order to address the current issue to the public, we decide to make a R Shiny app that is able to predict your current body state
+      by filling up our survey. Remember! A good healthy body is worth more than a crown in gold.",
+      size = "l", 
+      closeOnEsc = FALSE,
+      closeOnClickOutside = FALSE,
+      html = FALSE,
+      type = "",
+      showConfirmButton = TRUE,
+      showCancelButton = FALSE,
+      confirmButtonText = "Let's begin!",
+      confirmButtonCol = "#AEDEF4",
+      timer = 0,
+      imageUrl = "",
+      animation = TRUE
+    )
     
     output$gender <- renderPrint({input$gender})
     output$age <- renderPrint({input$age})
@@ -143,21 +164,36 @@ shinyServer(function(input, output) {
         return(verdict)
     }
     
-    values <- reactiveValues(variable = NA)
+    values <- reactiveValues(variable = "Please Click the Predict Button")
     
-    observe({
-      if (input$submit > 0) {
+    observeEvent(input$submit, {
+      age <- as.numeric(input$age)
+      weight <- as.numeric(input$weight)
+      height <- as.numeric(input$height)
+      closeAlert(session, "exampleAlert")
+      
+      if (is.na(age) | is.na(weight) | is.na(height)) {
+        createAlert(session, "alert", "exampleAlert", title = "Invalid Value",
+                    content = "Don't leave any fields blank!", append=FALSE)
+        output$predictionResult <- renderText(isolate(NA))
+      } else if (age == 0 | weight == 0 | height == 0) {
+        createAlert(session, "alert", "exampleAlert", title = "Invalid Value",
+                    content = "You think try to put 0 is funny isn't it?", append=FALSE)
+        output$predictionResult <- renderText(isolate(NA))
+      } else if (age < 0 | weight < 0 | height < 0) {
+        createAlert(session, "alert", "exampleAlert", title = "Invalid Value",
+                    content = "You think try to put negative value is funny isn't it?", append=FALSE)
+        output$predictionResult <- renderText(isolate(NA))
+      } else {
+        closeAlert(session, "exampleAlert")
         values$variable <- isolate(predict_result())
+        output$predictionResult <- renderText(isolate(values$variable))
       }
     })
-    
-    output$predictionResult <- renderText({values$variable})
-    
     
     bmiDf <- data.frame("Category"=c("Underweight", "Normal Weight", "Overweight Level I", "Overweight Level II","Obesity Type I", "Obesity Type II", "Obesity III"),
                         "BMI_Level"=c("< 18.5", "18.5 - 24.99", "25 - 26.99", "27 - 29.99", "30 - 34.99", "35 - 39.99", ">= 40"))
     
     output$BMItable <- renderTable(bmiDf)
     
-
 })
