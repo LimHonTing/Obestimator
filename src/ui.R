@@ -35,7 +35,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           tabsetPanel(type="tabs",
                       #Detail Panel
                       tabPanel("Details",
-                               h2(strong("Selection:")),
+                               h2(strong("Selection")),
                                br(),
                                h4(paste("Gender:")),
                                verbatimTextOutput("gender"),
@@ -74,7 +74,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           
                       #Result Panel
                       tabPanel("Prediction",
-                               h2(strong("Prediction Result:")),
+                               h2(strong("Prediction Result")),
                                h3(verbatimTextOutput("predictionResult")),
                                bsAlert("alert"),
                                br(),
