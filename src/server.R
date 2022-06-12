@@ -7,6 +7,8 @@ library(r2d3)
 library(DT)
 library(rlang)
 library(reshape)
+library(caret)
+library(cvms)
 
 shinyServer(function(input, output, session) {
   
@@ -260,9 +262,9 @@ shinyServer(function(input, output, session) {
     memberDf <- data.frame(Name,Matric)
     output$memberTable <- renderTable(memberDf)
     
-    dt3 = read.csv("obesity(cleaned).csv", header = TRUE)
+    dt3 = read.csv("obesity(cleaned).csv", header = TRUE )
     dt3[1] <- NULL
-    dt3 <- rename(dt3, "TypeOfObesity" = NObeyesdad)
+    dt3 <- dplyr::rename(dt3, "TypeOfObesity" = NObeyesdad)
     
     dt3$Gender <- as.factor(dt3$Gender)
     dt3$family_history_with_overweight <- as.factor(dt3$family_history_with_overweight)

@@ -174,7 +174,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                       ),
                       
                       tabPanel("Dataset",
-                               h3(strong(paste("An overview for People with Different Obesity level in The World"))),
+                               h3(strong(paste("An Overview for People with Different Obesity Level in the World"))),
                                dataTableOutput("datatable1"),
                                hr(),
                                h3(strong(paste("Ranking of Overweight by Country"))),
@@ -200,10 +200,12 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                       ),
                       
                       tabPanel("Model Information",
-                               h2(strong("Modal accuracy:")),
+                               h2(strong("Model Accuracy")),
+                               br(),
                                verbatimTextOutput("accuracy"),
                                br(),
-                               h3(strong(paste("Sensitivity"))),
+                               h2(strong(paste("Sensitivity"))),
+                               br(),
                                tableOutput("datatable_sensitivity"),
                                br(),
                                h2(strong("Confusion Matrix")),
@@ -323,9 +325,9 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                       ),
                       
                       tabPanel("About Us",
-                               h2(strong("Problem Statement:")),
+                               h2(strong("Problem Statement")),
                                br(),
-                               h4(paste("Based on World Health Orgranization(WHO), 
+                               h4(paste("Based on World Health Orgranization (WHO), 
                                         worldwide obesity has nearly tripled since 1975. 
                                         39 million children under the age of 5 were overweight or obese in 2020.
                                         Over 340 million children and adolescents 
@@ -333,7 +335,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                         tend to suffer from diseases such as cardiovascular disease, diabetes, 
                                         musculoskeletal disorders, and some cancers.")),
                                br(),
-                               h2(strong("Objectives:")),
+                               h2(strong("Objectives")),
                                br(),
                                tags$div(
                                  tags$ul(
@@ -356,7 +358,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                  )
                                ),
                                br(),
-                               h2(strong("Team members:")),
+                               h2(strong("Team members")),
                                br(),
                                tableOutput("memberTable"),
                       )
