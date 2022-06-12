@@ -3,6 +3,10 @@ library(nnet)
 library(shinyBS)
 library(dplyr)
 library(ggplot2)
+library(r2d3)
+library(forcats)
+library(DT)
+library(rlang)
 
 #Graph Part
 r2d3_script <- "
