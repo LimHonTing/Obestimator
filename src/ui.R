@@ -170,6 +170,14 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                
                       ),
                       
+                      tabPanel("Dataset",
+                               h3(strong(paste("An overview for People with Different Obesity level in The World"))),
+                               dataTableOutput("datatable1"),
+                               hr(),
+                               h3(strong(paste("Ranking of Overweight by Country"))),
+                               dataTableOutput("datatable2")
+                               ),
+                      
                       tabPanel("Information Center",
                                h2(strong("BMI Categories")),
                                br(),

@@ -1,6 +1,7 @@
 library(shiny)
 library(nnet)
 library(shinyBS)
+library(dplyr)
 
 shinyServer(function(input, output, session) {
   
@@ -195,5 +196,33 @@ shinyServer(function(input, output, session) {
                         "BMI_Level"=c("< 18.5", "18.5 - 24.99", "25 - 26.99", "27 - 29.99", "30 - 34.99", "35 - 39.99", ">= 40"))
     
     output$BMItable <- renderTable(bmiDf)
+    
+    # reading csv file from github
+    dt1 = read.csv("./obesity(cleaned).csv", header = TRUE)
+    
+    dt1 <- within(dt1, {   
+      NObeyesdad.cat <- NA # need to initialize variable
+      NObeyesdad.cat[NObeyesdad == "Insufficient_Weight"] <- "Under Weight"
+      NObeyesdad.cat[NObeyesdad == "Normal_Weight"] <- "Normal Weight"
+      NObeyesdad.cat[NObeyesdad == "Obesity_Type_I"] <- "Obesity Type 1"
+      NObeyesdad.cat[NObeyesdad == "Obesity_Type_II"] <- "Obesity Type 2"
+      NObeyesdad.cat[NObeyesdad == "Obesity_Type_III"] <- "Obesity Type 3"
+      NObeyesdad.cat[NObeyesdad == "Overweight_Level_I"] <- "Overweight 1"
+      NObeyesdad.cat[NObeyesdad == "Overweight_Level_II"] <- "Overweight 2"
+      
+    } )
+    
+    dt1 <- dt1 %>% slice(1:40) %>% select(Gender, Age, family_history_with_overweight, NObeyesdad.cat)
+    
+    colnames(dt1) <- c("Gender", "Age", "Family History with Overweight", "Obesity Type")
+    output$datatable1 <- renderDataTable(
+      dt1, options = list(pageLength=10,lengthMenu=c(10,20,30,40))
+    )
+    
+    dt2 = read.csv("https://raw.githubusercontent.com/julietezekwe/obese-data/master/data/data.csv", header = TRUE, check.names = FALSE)
+    dt2 <- dt2 %>% select('Overall rank', Country, 'Overall mean BMI (kg/m2)')
+    output$datatable2 <- renderDataTable(
+      dt2, options = list(pageLength=10, lengthChange = FALSE)
+    )
     
 })
