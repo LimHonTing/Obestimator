@@ -3,6 +3,8 @@ library(shinythemes)
 library(shinyalert)
 library(shinyBS)
 library(r2d3)
+library(DT)
+library(rlang)
 
 shinyUI(fluidPage(theme = shinytheme("flatly"),
                   useShinyalert(force = TRUE),
@@ -176,7 +178,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                dataTableOutput("datatable1"),
                                hr(),
                                h3(strong(paste("Ranking of Overweight by Country"))),
-                               dataTableOutput("datatable2")
+                               dataTableOutput("datatable2"),
                                ),
                       
                       
@@ -192,9 +194,9 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                                 "Obesity Level Category"="Obesity_Level_Category"),
                                            selected = "Gender"),
                                d3Output("d3"),
-                               DT::dataTableOutput("table"),
+                               DT::dataTableOutput("graph_table"),
                                textInput("val", "Value", "Gender")
-                               
+
                       ),
                       
                       
