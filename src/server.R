@@ -302,8 +302,8 @@ shinyServer(function(input, output, session) {
     )
     
     #Graph Part
-    df = read.csv("./obesity(Graph).csv",header=TRUE)
-    graph_df = read.csv("obesity(Graph).csv")
+    df = read.csv("./obesity(Graph).csv",header=TRUE, fileEncoding="UTF-8")
+    graph_df = read.csv("obesity(Graph).csv", fileEncoding="UTF-8")
     output$d3 <- renderD3({
       graph_df %>%
         mutate(label = !!sym(input$var)) %>%
