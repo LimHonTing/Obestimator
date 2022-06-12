@@ -210,6 +210,85 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                br(),
                                h2(strong("Confusion Matrix")),
                                plotOutput("cmplot"),
+                               br(),
+                               h2(strong("Features")),
+                               br(),
+                               h4(paste("The features that we used to predict the obesity level are stated as follow:")),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Frequent consumption of high caloric food (FAVC)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Gender")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Age")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Height(m)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Weight(kg)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Frequent consumption of high caloric food (FAVC)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Frequency of consumption of vegetables (FCVC)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Number of main meals (NCP)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Consumption of food between meals (CAEC)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Consumption of water daily (CH20)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Consumption of alcohol (CALC)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Calories consumption monitoring (SCC)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Physical activity frequency (FAF)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Time using technology devices (TUE)")),
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Transportation used (MTRANS)")),
+                                 )
+                               ),
                       ),
                       
                       tabPanel("Information Center",
