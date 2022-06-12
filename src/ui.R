@@ -178,6 +178,25 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                dataTableOutput("datatable2")
                                ),
                       
+                      
+                      tabPanel("Graph",
+                               selectInput("var", "Variable",
+                                           list("Gender","Family History With OverWeight"="Family_History_With_OverWeight",
+                                                "Frequency of High Caloric Food Consumption"="Frequency_of_High_Caloric_Food_Consumption",
+                                                "Vegetables Consumption"="Vegetables_Consumption","Number of Main Meals"="Number_of_Main_Meals",
+                                                "Snack Between Meals"="Snack_Between_Meals","Smoke","Daily Water Intake"="Daily_Water_Intake",
+                                                "Calories Monitoring"="Calories_Monitoring",
+                                                "Physical Activity"="Physical_Activity","Technology Device Usage"="Technology_Device_Usage",
+                                                "Alcohol Consumption"="Alcohol","Transportation",
+                                                "Obesity Level Category"="Obesity_Level_Category"),
+                                           selected = "Gender"),
+                               d3Output("d3"),
+                               DT::dataTableOutput("table"),
+                               textInput("val", "Value", "Gender")
+                               
+                      ),
+                      
+                      
                       tabPanel("Information Center",
                                h2(strong("BMI Categories")),
                                br(),
@@ -289,6 +308,10 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                  )
                                ),
                       )
+                      
+                      
+                      
+                      
                    )
                 )
     )
