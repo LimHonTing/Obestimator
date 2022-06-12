@@ -255,4 +255,86 @@ shinyServer(function(input, output, session) {
         datatable()
     })
     
+    Name <- c("Lim Hon Ting","Wong Yan Jian","Chen Ching Yen","Yap Yun Onn")
+    Matric <- c("S2114212","U2102753","U2102769","S2105674")
+    memberDf <- data.frame(Name,Matric)
+    output$memberTable <- renderTable(memberDf)
+    
+    dt3 = read.csv("obesity(cleaned).csv", header = TRUE)
+    dt3[1] <- NULL
+    dt3 <- rename(dt3, "TypeOfObesity" = NObeyesdad)
+    
+    dt3$Gender <- as.factor(dt3$Gender)
+    dt3$family_history_with_overweight <- as.factor(dt3$family_history_with_overweight)
+    dt3$FAVC <- as.factor(dt3$FAVC)
+    dt3$FCVC <- as.factor(dt3$FCVC)
+    dt3$NCP <- as.factor(dt3$NCP)
+    dt3$CAEC <- as.factor(dt3$CAEC)
+    dt3$SMOKE <- as.factor(dt3$SMOKE)
+    dt3$CH2O <- as.factor(dt3$CH2O)
+    dt3$SCC <- as.factor(dt3$SCC)
+    dt3$FAF <- as.factor(dt3$FAF)
+    dt3$TUE <- as.factor(dt3$TUE)
+    dt3$CALC <- as.factor(dt3$CALC)
+    dt3$MTRANS <- as.factor(dt3$MTRANS)
+    dt3$TypeOfObesity <- as.factor(dt3$TypeOfObesity)
+    dt3$TypeOfObesity <- relevel(dt3$TypeOfObesity, ref="Insufficient_Weight")
+    dt3$TypeOfObesity <- as.ordered(dt3$TypeOfObesity)
+    
+    index <- createDataPartition(dt3$TypeOfObesity, p = .70, list = FALSE)
+    train <- dt3[index,]
+    test <- dt3[-index,]
+    
+    info_model <- readRDS("prediction_model.rds")
+    test_predict <- predict(info_model, test) # 30% tested result (predicted)
+    confusion_result <- table(test_predict, test$TypeOfObesity)
+    
+    #cfxdataframe <- as.data.frame(as.matrix(cfx))
+    #cfx2 <- matrix(cfx$table, nrow=7, ncol=7)
+    #cm_d <- as.data.frame(cfx2)
+    #names(cm_d) <- c("Insufficient_Weight", "Normal_Weight", "Obesity_Type_I", "Obesity_Type_II", "Obesity_Type_III", "Overweight_Level_I", "Overweight_Level_II")
+    #View(cfx$table)
+    #View(cm_d)
+    
+    x_data <- test$TypeOfObesity
+    y_data <- test_predict
+    
+    cm <- confusionMatrix(test$TypeOfObesity, test_predict)
+    overall.accuracy <- cm$overall['Accuracy']
+    #cm_d<-as.data.frame(cm$table)
+    #cm_st<-data.frame(cm$overall)
+    #cm_st$cm.overall <- round(cm_st$cm.overall,2)
+    #cm_p <- as.data.frame(prop.table(cm$table))
+    #cm_d$Perc <- round(cm_p$Freq*100,2)
+    #print(cm)
+    #View(cm)
+    
+    output$accuracy <- renderPrint(overall.accuracy)
+    
+    sensitivity <- cm$byClass[, 'Sensitivity']
+    class_name<-c("Insufficient Weight","Normal Weight","Obesity Type I", "Obesity Type II", "Obesity Type III", "Overweight Level I", "Overweight Level nII")
+    sensitivity_t <- data.frame("Type" = class_name, "Sensitivity" = sensitivity)
+    output$datatable_sensitivity <- renderTable(
+      sensitivity_t, check.names = FALSE
+    )
+    
+    d_multi <- tibble("target" = x_data,
+                      "prediction" = y_data)
+    conf_mat <- confusion_matrix(targets = d_multi$target, predictions = d_multi$prediction)
+    
+    output$cmplot <- renderPlot(
+      
+      plot_confusion_matrix(conf_mat$`Confusion Matrix`[[1]],
+                            font_counts = font(
+                              size = 6,
+                              color = "black"
+                            ),
+                            tile_border_color = NA,
+                            tile_border_size = 0.1,
+                            tile_border_linetype = "solid",
+                            add_normalized = FALSE,
+                            add_col_percentages = FALSE,
+                            add_row_percentages = FALSE)
+    )
+    
 })

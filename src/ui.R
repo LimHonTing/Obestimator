@@ -199,6 +199,16 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
 
                       ),
                       
+                      tabPanel("Model Information",
+                               h2(strong("Modal accuracy:")),
+                               verbatimTextOutput("accuracy"),
+                               br(),
+                               h3(strong(paste("Sensitivity"))),
+                               tableOutput("datatable_sensitivity"),
+                               br(),
+                               h2(strong("Confusion Matrix")),
+                               plotOutput("cmplot"),
+                      ),
                       
                       tabPanel("Information Center",
                                h2(strong("BMI Categories")),
@@ -310,11 +320,46 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                    tags$li(h4("Encourage canteeen to prepare more healthy food"))
                                  )
                                ),
+                      ),
+                      
+                      tabPanel("About Us",
+                               h2(strong("Problem Statement:")),
+                               br(),
+                               h4(paste("Based on World Health Orgranization(WHO), 
+                                        worldwide obesity has nearly tripled since 1975. 
+                                        39 million children under the age of 5 were overweight or obese in 2020.
+                                        Over 340 million children and adolescents 
+                                        aged 5-19 were overweight or obese in 2016. People who are obese and overweight 
+                                        tend to suffer from diseases such as cardiovascular disease, diabetes, 
+                                        musculoskeletal disorders, and some cancers.")),
+                               br(),
+                               h2(strong("Objectives:")),
+                               br(),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Raising awareness on obesity in the community."))
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Promote healthy lifestyle."))
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Provide information about BMI scale, cause and effect of overweight."))
+                                 )
+                               ),
+                               tags$div(
+                                 tags$ul(
+                                   tags$li(h4("Estimate your potential of being obese."))
+                                 )
+                               ),
+                               br(),
+                               h2(strong("Team members:")),
+                               br(),
+                               tableOutput("memberTable"),
                       )
-                      
-                      
-                      
-                      
                    )
                 )
     )
