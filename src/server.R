@@ -327,9 +327,6 @@ shinyServer(function(input, output, session) {
         datatable()
     })
 
-
-    
-    
     output$plot1 <- renderPlot({
       
       ggplot(df,aes(x=NObeyesdad.cat,fill=NObeyesdad.cat)) + 

@@ -2,6 +2,7 @@ library(shiny)
 library(shinythemes)
 library(shinyalert)
 library(shinyBS)
+library(r2d3)
 
 shinyUI(fluidPage(theme = shinytheme("flatly"),
                   useShinyalert(force = TRUE),
