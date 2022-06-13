@@ -136,6 +136,10 @@ shinyServer(function(input, output, session) {
           df$technology <- "2"
         }
         
+        if(df$transport == "Public Transportation"){
+          df$transport <- "Public_Transportation"
+        }
+        
         return (list(df = df))
       }
     })
