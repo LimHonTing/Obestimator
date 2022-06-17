@@ -1,0 +1,60 @@
+---
+title: "OBESTIMATOR"
+subtitle: "Doctor Strange's"
+date: '2022-06-23'
+author:
+  - Lim Hon Ting    S2114212
+  - Wong Yan Jian 	U2102753
+  - Chen Ching Yen	U2102769
+  - Yap Yun Onn	    S2105674
+output: slidy_presentation
+---
+
+## Introduction
+
+>This presentation is part of the course project for the *WIE2003* Introduction to Data Science.
+
+>Based on *World Health Orgranization (WHO)*, worldwide obesity has nearly tripled since 1975.
+
+>Therefore, we decided to develop a shiny application to monitor people's obesity levels. 
+
+>Our application *(Obestimator)* is developed and now available at:
+https://limhonting.shinyapps.io/Obestimator/
+
+## Obestimator
+
+>This application, called Obestimator will predict different obesity levels of the users based on their gender, age, height, weight, family history and etc.
+
+>We have found a dataset which is suitable to train our model from Kaggle and we used R language to clean the data and build the model.
+
+>Source code for *ui.R* and *server.R* code are available on the GitHub : https://github.com/LimHonTing/Obestimator
+
+## Description of Our Model
+
+>Our application has implemented multiclass classification using logistic regression.
+
+>We have tested our model using random 30% data from the dataset and achieved around 96% of accuracy.
+
+>After the prediction, our application will offer some suggetions to the users based on their obesity level.
+
+## Screenshot of Obestimator
+
+![](screenshot.png)
+<!-- Limit image width and height -->
+<style type='text/css'>
+img {
+    max-height: 560px;
+    max-width: 964px;
+}
+</style>
+
+<!-- Center image on slide -->
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script type='text/javascript'>
+$(function() {
+    $("p:has(img)").addClass('centered');
+});
+</script>
+
+Try out Obestimator here:
+https://limhonting.shinyapps.io/Obestimator/
