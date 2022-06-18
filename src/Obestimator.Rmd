@@ -12,11 +12,11 @@ output: slidy_presentation
 
 ## Introduction
 
->This presentation is part of the course project for the *WIE2003* Introduction to Data Science.
+This presentation is part of the course project for the *WIE2003* Introduction to Data Science.
 
->Based on *World Health Orgranization (WHO)*, worldwide obesity has nearly tripled since 1975.
+Based on *World Health Orgranization (WHO)*, worldwide obesity has nearly tripled since 1975.
 
->Therefore, we decided to develop a shiny application to monitor people's obesity levels. 
+Therefore, we decided to develop a shiny application to monitor people's obesity levels. 
 
 >Our application *(Obestimator)* is developed and now available at:
 https://limhonting.shinyapps.io/Obestimator/
@@ -58,3 +58,13 @@ $(function() {
 
 Try out Obestimator here:
 https://limhonting.shinyapps.io/Obestimator/
+
+## Key Takeaways
+Cause of obesity and overweight is an energy imbalance between calories consumed and calories expended. 
+
+For example, an increased intake of energy-dense foods that are high in fat and sugars and
+an increase in physical inactivity due to the increasingly sedentary nature of many forms of work, changing modes of transportation, and increasing urbanization.
+
+The consequences of overweight are cardiovascular diseases, diabetes, musculoskeletal disorders, and the chances of getting cancer surge. 
+
+Obesity and overweight can be prevented by having regular physical activity, and healthier foods.
