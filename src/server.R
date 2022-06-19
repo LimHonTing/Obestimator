@@ -1,5 +1,5 @@
 library(shiny)
-library(nnet)
+library(e1071)
 library(shinyBS)
 library(dplyr)
 library(ggplot2)
@@ -9,6 +9,26 @@ library(rlang)
 library(reshape)
 library(caret)
 library(cvms)
+
+# Preload the dataset
+model_data <- read.csv("obesity(cleaned).csv")
+model_data[1] <- NULL
+model_data["NObeyesdad"] <- NULL
+
+model_data$Gender <- as.factor(model_data$Gender)
+model_data$family_history_with_overweight <- as.factor(model_data$family_history_with_overweight)
+model_data$FAVC <- as.factor(model_data$FAVC)
+model_data$FCVC <- as.factor(model_data$FCVC)
+model_data$NCP <- as.factor(model_data$NCP)
+model_data$CAEC <- as.factor(model_data$CAEC)
+model_data$SMOKE <- as.factor(model_data$SMOKE)
+model_data$CH2O <- as.factor(model_data$CH2O)
+model_data$SCC <- as.factor(model_data$SCC)
+model_data$FAF <- as.factor(model_data$FAF)
+model_data$TUE <- as.factor(model_data$TUE)
+model_data$CALC <- as.factor(model_data$CALC)
+model_data$MTRANS <- as.factor(model_data$MTRANS)
+
 
 shinyServer(function(input, output, session) {
   
@@ -145,17 +165,16 @@ shinyServer(function(input, output, session) {
     })
     
     predict_result <- function() {
-        user_input <- list("Gender"=data()$df$gender, "Age"=data()$df$age, 
-                           "Height"=data()$df$height, "Weight"=data()$df$weight, 
-                           "family_history_with_overweight"=data()$df$familyOverweight, "FAVC"=data()$df$consumeHighCalories, 
-                           "FCVC"=data()$df$consumeVege, "NCP"=data()$df$mainMealsTime, 
-                           "CAEC"=data()$df$foodBetweenMeal, "SMOKE"=data()$df$smoke, 
-                           "CH2O"=data()$df$waterConsumption, "SCC"=data()$df$monitorCalories,
-                           "FAF"=data()$df$physicalActivity, "TUE"=data()$df$technology,
-                           "CALC"=data()$df$alcohol, "MTRANS"=data()$df$transport)
+        user_input <- data.frame(Gender=data()$df$gender, Age=data()$df$age, Height=data()$df$height, Weight=data()$df$weight, 
+                               family_history_with_overweight=data()$df$familyOverweight, FAVC=data()$df$consumeHighCalories,
+                               FCVC=data()$df$consumeVege, NCP=data()$df$mainMealsTime, CAEC=data()$df$foodBetweenMeal, SMOKE=data()$df$smoke, CH2O=data()$df$waterConsumption, 
+                               SCC=data()$df$monitorCalories, FAF=data()$df$physicalActivity, TUE=data()$df$technology, CALC=data()$df$alcohol, MTRANS=data()$df$transport)
         
         model <- readRDS("prediction_model.rds")
-        result <- predict(model, user_input)
+        combined <- rbind(model_data, user_input)
+        saved <- tail(combined, n = 1)
+        
+        result <- predict(model, saved)
         result_in_char <- as.character(result)
         verdict = ""
         if (result_in_char == "Insufficient_Weight") {
