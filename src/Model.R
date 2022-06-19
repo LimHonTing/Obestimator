@@ -27,13 +27,13 @@ data$TUE <- as.factor(data$TUE)
 data$CALC <- as.factor(data$CALC)
 data$MTRANS <- as.factor(data$MTRANS)
 data$TypeOfObesity <- as.factor(data$TypeOfObesity)
-data$TypeOfObesity <- relevel(data$TypeOfObesity, ref="Insufficient_Weight")
+# data$TypeOfObesity <- relevel(data$TypeOfObesity, ref="Insufficient_Weight")
 
 # Check for missing values
 apply(data, 2, function(x) any(is.na(x) | is.infinite(x)))
 
 # Set ordinal level for type of obesity
-data$TypeOfObesity <- as.ordered(data$TypeOfObesity)
+# data$TypeOfObesity <- as.ordered(data$TypeOfObesity)
 
 # Summary of dataset
 summary(data)
@@ -57,41 +57,89 @@ index <- createDataPartition(data$TypeOfObesity, p = .70, list = FALSE)
 train <- data[index,]
 test <- data[-index,]
 
-# Setting up the model
-library(nnet)
-nnet_model <- multinom(TypeOfObesity~., train)
+# # Setting up the model
+# library(nnet)
+# nnet_model <- multinom(TypeOfObesity~., train)
+# 
+# summary(nnet_model)
+# (ctable <- coef(summary(nnet_model)))
+# p <- pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2
+# (ctable <- cbind(ctable, "p value" = p))
+# 
+# # Confusion Matrix & Error for Training data
+# nnet_train_pred <- predict(nnet_model, train)
+# (nnet_tab_pred <- table(nnet_train_pred, train$TypeOfObesity))
+# 1- sum(diag(nnet_tab_pred))/sum(nnet_tab_pred)
+# 
+# # Confusion Matrix & Error for Test data
+# nnet_test_pred <- predict(nnet_model, test)
+# nnet_tab_pred2 <- table(nnet_test_pred, test$TypeOfObesity)
+# 1- sum(diag(nnet_tab_pred2))/sum(nnet_tab_pred2)
+# 
+# # Check prediction
+# check_pred <- predict(nnet_model, test[1:5,], type="prob")
+# print(check_pred)
+# 
+# 
+# # Calculate p-Value for checking confidential level of each variables and find the significant variables
+# z <- summary(nnet_model)$coefficients/summary(nnet_model)$standard.errors
+# p <- (1 - pnorm(abs(z), 0, 1)) * 2
+# p
+# 
 
-summary(nnet_model)
-(ctable <- coef(summary(nnet_model)))
-p <- pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2
-(ctable <- cbind(ctable, "p value" = p))
+# Setting the model
+library(e1071)
+svmfit <- svm(TypeOfObesity ~., data = train, kernel = "radial", cost = .1, type="C-classification")
+print(svmfit)
 
-# Confusion Matrix & Error for Training data
-nnet_train_pred <- predict(nnet_model, train)
-(nnet_tab_pred <- table(nnet_train_pred, train$TypeOfObesity))
-1- sum(diag(nnet_tab_pred))/sum(nnet_tab_pred)
+# Check the accuracy of train dataset
+pred_train <- predict(svmfit, train)
+mean(pred_train == train$TypeOfObesity)
 
-# Confusion Matrix & Error for Test data
-nnet_test_pred <- predict(nnet_model, test)
-nnet_tab_pred2 <- table(nnet_test_pred, test$TypeOfObesity)
-1- sum(diag(nnet_tab_pred2))/sum(nnet_tab_pred2)
+# Tune the model to search for the best parameter
+tuned_model= tune(svm, TypeOfObesity ~., data = train, ranges=list(cost=10^seq(-3,3), kernel=c("linear","polynomial","radial","sigmoid")) )
+summary(tuned_model)
 
-# Check prediction
-check_pred <- predict(nnet_model, test[1:5,], type="prob")
-print(check_pred)
+# create a tuned model
+svmfit <- svm(TypeOfObesity ~., data = train, kernel = "radial", cost = 1000, type="C-classification")
+print(svmfit)
 
+# Check the accuracy of train and test dataset
+pred_train <- predict(svmfit, train)
+mean(pred_train == train$TypeOfObesity)
 
-# Calculate p-Value for checking confidential level of each variables and find the significant variables
-z <- summary(nnet_model)$coefficients/summary(nnet_model)$standard.errors
-p <- (1 - pnorm(abs(z), 0, 1)) * 2
-p
+pred_test <- predict(svmfit, test)
+mean(pred_test == test$TypeOfObesity)
 
-# Save the model to use it later for Shiny app
-saveRDS(nnet_model, "src/prediction_model.rds")
+# Print the confusion matrix for train dataset
+p <- predict(svmfit, train)
+tab <- table(Predicted = p, Actual = train$TypeOfObesity)
+tab
+
+p <- predict(svmfit, test)
+tab <- table(Predicted = p, Actual = test$TypeOfObesity)
+tab
+
+# # Save the model to use it later for Shiny app
+saveRDS(svmfit, "prediction_model.rds")
 
 # To read the model for Shiny app
 model <- readRDS("prediction_model.rds")
-user_input <- predict(model, test[1,])
+test_input <- data.frame(Gender="Male", Age=20, Height=1.6, Weight=60, 
+                         family_history_with_overweight="yes", FAVC="yes",
+                         FCVC=1, NCP=1, CAEC="no", SMOKE="yes", CH2O=3, 
+                         SCC="yes", FAF=0, TUE=2, CALC="no", MTRANS="Automobile")
+
+data["NObeyesdad"] <- NULL
+combined <- rbind(data, test_input)
+saved <- tail(combined, n = 1)
+
+user_input <- predict(model, saved)
+
+user_input <- predict(model, data[1,])
+sapply(lapply(data[1,], unique), length)
+
 print(user_input)
 result <- as.character(user_input)
 typeof(result)
+result
