@@ -1,7 +1,8 @@
-/* #intro{
-    background: rgb(255, 255, 255);
-    background: linear-gradient(90deg, rgb(199, 196, 255) 0%, rgba(9,121,90,1) 35%, rgba(0,212,255,1) 100%);
-} */
+.slide.titlepage.first-slide{
+  background: linear-gradient(to left, #6699ff 3%, #ffccff 100%);
+  width: 78%;
+  margin-left: 10%;
+}
 
 #align-center{
     text-align: center;
@@ -9,15 +10,16 @@
     width: 78%;
     background: rgb(238,174,202);
     background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
-    font-size: 48px;
+    font-size: 42px;
 }
 
 #section{
+    text-align: justify;
     margin-left: 10%;
     width: 78%;
     background: rgb(238,174,202);
     background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
-    font-size: 50px;
+    font-size: 42px;
 }
 
 h1{

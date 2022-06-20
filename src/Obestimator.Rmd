@@ -45,8 +45,8 @@ https://limhonting.shinyapps.io/Obestimator/
 <!-- Limit image width and height -->
 <style type='text/css'>
 img {
-    max-height: 560px;
-    max-width: 964px;
+    max-height: 480px;
+    max-width: auto;
 }
 </style>
 
@@ -65,8 +65,8 @@ https://limhonting.shinyapps.io/Obestimator/
 
 >Cause of obesity and overweight is an energy imbalance between calories consumed and calories expended. 
 
->For example, an increased intake of energy-dense foods that are high in fat and sugars and
-an increase in physical inactivity due to the increasingly sedentary nature of many forms of work, changing modes of transportation, and increasing urbanization.
+>An increased intake of energy-dense foods that are high in fat and sugars and
+an increase in physical inactivity is also another root cause of overweight and obesity.
 
 >The consequences of overweight are cardiovascular diseases, diabetes, musculoskeletal disorders, and the chances of getting cancer surge. 
 

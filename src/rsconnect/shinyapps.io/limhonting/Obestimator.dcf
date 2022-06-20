@@ -5,10 +5,10 @@ account: limhonting
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6475993
-bundleId: 6000878
+bundleId: 6020927
 url: https://limhonting.shinyapps.io/Obestimator/
-when: 1655065796.6768
-lastSyncTime: 1655065796.67684
+when: 1655622628.00268
+lastSyncTime: 1655622628.00269
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: Clean_Obesity.R|Model.R|obesity_Graph.R|ObesityDataSet_raw_and_data_sinthetic.csv
