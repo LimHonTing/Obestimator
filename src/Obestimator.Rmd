@@ -7,10 +7,12 @@ author:
   - Wong Yan Jian 	U2102753
   - Chen Ching Yen	U2102769
   - Yap Yun Onn	    S2105674
-output: slidy_presentation
+output:
+  slidy_presentation:
+    css: styles.css
 ---
 
-## Introduction
+## Introduction {#section}
 
 >This presentation is part of the course project for the *WIE2003* Introduction to Data Science.
 
@@ -21,7 +23,7 @@ output: slidy_presentation
 >Our application *(Obestimator)* is developed and now available at:
 https://limhonting.shinyapps.io/Obestimator/
 
-## Obestimator
+## Obestimator {#section}
 
 >This application, called Obestimator will predict different obesity levels of the users based on their gender, age, height, weight, family history and etc.
 
@@ -29,7 +31,7 @@ https://limhonting.shinyapps.io/Obestimator/
 
 >Source code for *ui.R* and *server.R* code are available on the GitHub : https://github.com/LimHonTing/Obestimator
 
-## Description of Our Model
+## Description of Our Model {#section}
 
 >Our application has implemented multiclass classification using logistic regression.
 
@@ -37,7 +39,7 @@ https://limhonting.shinyapps.io/Obestimator/
 
 >After the prediction, our application will offer some suggetions to the users based on their obesity level.
 
-## Screenshot of Obestimator
+## Screenshot of Obestimator {#align-center}
 
 ![](screenshot.png)
 <!-- Limit image width and height -->
@@ -59,7 +61,8 @@ $(function() {
 Try out Obestimator here:
 https://limhonting.shinyapps.io/Obestimator/
 
-## Key Takeaways
+## Key Takeaways {#section}
+
 >Cause of obesity and overweight is an energy imbalance between calories consumed and calories expended. 
 
 >For example, an increased intake of energy-dense foods that are high in fat and sugars and
