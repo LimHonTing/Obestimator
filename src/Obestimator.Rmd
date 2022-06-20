@@ -39,13 +39,15 @@ https://limhonting.shinyapps.io/Obestimator/
 
 >After the prediction, our application will offer some suggetions to the users based on their obesity level.
 
-## Screenshot of Obestimator {#align-center}
+## Description of Obestimator {#align-center}
+
+> The app starts with a default interface. To try this app, user will need to input their details and answer the question provided. After user answering all the questions,the app will output the result.
 
 ![](screenshot.png)
 <!-- Limit image width and height -->
 <style type='text/css'>
 img {
-    max-height: 480px;
+    max-height: 390px;
     max-width: auto;
 }
 </style>
