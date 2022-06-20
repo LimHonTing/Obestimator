@@ -41,24 +41,17 @@ https://limhonting.shinyapps.io/Obestimator/
 
 ## Description of Obestimator {#align-center}
 
-> The app starts with a default interface. To try this app, user will need to input their details and answer the question provided. After user answering all the questions,the app will output the result.
+> The app starts with a default interface. To try this app, user will need to input their details and answer the question provided. After user answering all the questions,the app will output the result. Also, we have implemented page for doing exploratory data analysis and others in our application.
 
 ![](screenshot.png)
+![](screenshot2.png)
 <!-- Limit image width and height -->
 <style type='text/css'>
 img {
-    max-height: 390px;
+    max-height: 340px;
     max-width: auto;
 }
 </style>
-
-<!-- Center image on slide -->
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
-<script type='text/javascript'>
-$(function() {
-    $("p:has(img)").addClass('centered');
-});
-</script>
 
 Try out Obestimator here:
 https://limhonting.shinyapps.io/Obestimator/
