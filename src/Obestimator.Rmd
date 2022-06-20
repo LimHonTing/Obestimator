@@ -33,7 +33,7 @@ https://limhonting.shinyapps.io/Obestimator/
 
 ## Description of Our Model {#section}
 
->Our application has implemented multiclass classification using logistic regression.
+>Our application has implemented multiclass classification using Support Vector Machine (SVM).
 
 >We have tested our model using random 30% data from the dataset and achieved around 96% of accuracy.
 
